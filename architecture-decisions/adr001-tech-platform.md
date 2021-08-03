@@ -9,6 +9,7 @@ Two [constraints](../README.md#constraints) in particular provide the context:
 ## Decision
 
 I will use [ASP.NET Core Blazor](https://docs.microsoft.com/en-us/aspnet/core/blazor/?view=aspnetcore-5.0); more specifically, an [ASP.NET Core hosted Blazor WebAssembly (wasm) app](https://docs.microsoft.com/en-us/aspnet/core/blazor/hosting-models?view=aspnetcore-5.0#blazor-webassembly).
+The client application will support PWA so that it can be installed.
 
 ## Status
 
