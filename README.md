@@ -13,9 +13,9 @@
 
 | Constraint | Type | Context |
 | --- | --- | --- |
-| Must run on multiple operating systems including, but not limited to, Windows and iOS | Technical | I listen to music across multiple devices and scenarios |
+| Client application must run on multiple operating systems including, but not limited to, Windows and iOS | Technical | I listen to music across multiple devices and scenarios |
 | Must utilize managed, free cloud offerings | Business, Technical | Reduces my spend to as close to $0 as possible, while allowing me to focus on value-add |
-| Use dotnet | Technical | Reduce the breadth of learning required by me. Although there are many worthwhile tech stacks I can consider, my main focus here is value-add rather than learning |
+| Use dotnet | Technical | Reduce the breadth of learning required by me. Although there are many worthwhile tech stacks to consider, my main focus is value-add rather than learning |
 
 ## Risks
 
