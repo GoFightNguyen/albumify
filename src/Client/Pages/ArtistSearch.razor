@@ -1,0 +1,28 @@
+﻿@page "/artist-search"
+@inject IArtistDataManager artistDataManager
+
+<span>Search:&nbsp;</span>
+<input @bind="_artistName" />
+<span>&nbsp;</span>
+<button @onclick="SearchArtists">Search</button>
+
+@if(_artists != null)
+{
+    <ul>
+     @foreach(var artist in _artists)
+        {
+            <li>@artist.Name</li>
+        }
+ </ul>
+}
+
+@code {
+    private string _artistName = "";
+    private List<Artist> _artists = new();
+
+    private async Task SearchArtists()
+    {
+        if(!string.IsNullOrWhiteSpace(_artistName))
+            _artists = await artistDataManager.Search(_artistName);
+    }
+}
