@@ -1,5 +1,6 @@
 ﻿using Albumify.Server.Services;
 using Albumify.Shared.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Albumify.Server.Controllers
 {
+    [Authorize]
     [Route("[controller]")]
     [ApiController]
     public class ArtistController : ControllerBase

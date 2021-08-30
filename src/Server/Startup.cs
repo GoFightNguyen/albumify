@@ -1,4 +1,6 @@
 using Albumify.Server.Services;
+using AspNet.Security.OAuth.Spotify;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -23,6 +25,29 @@ namespace Albumify.Server
             // TODO: when using real data, consider compression
 
             services.AddSingleton<LocalArtistDataManager>();
+
+            services.AddAuthorization(options => {
+                options.AddPolicy(SpotifyAuthenticationDefaults.AuthenticationScheme, policy => {
+                    policy.AddAuthenticationSchemes(SpotifyAuthenticationDefaults.AuthenticationScheme);
+                    policy.RequireAuthenticatedUser();
+                });
+            });
+            services
+                .AddAuthentication(options => {
+                    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = SpotifyAuthenticationDefaults.AuthenticationScheme;
+                })
+                .AddCookie()
+                .AddSpotify(SpotifyAuthenticationDefaults.AuthenticationScheme, options => {
+                    //https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers/tree/dev/src/AspNet.Security.OAuth.Spotify
+
+                    // TODO: continue here
+                    // Currently, auth flow does not work. There is an Authorize attribute on the artist api
+                    // There are not authorizations set up client-side
+                    options.ClientId = "";
+                    options.ClientSecret = "";
+                });
+
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
@@ -48,8 +73,10 @@ namespace Albumify.Server
 
             app.UseRouting();
 
-            app.UseEndpoints(endpoints =>
-            {
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints => {
                 endpoints.MapRazorPages();
                 endpoints.MapControllers();
                 endpoints.MapFallbackToFile("index.html");
